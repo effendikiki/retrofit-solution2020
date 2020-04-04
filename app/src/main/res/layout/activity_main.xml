@@ -21,6 +21,7 @@
 
     <Button
         android:id="@+id/bntToRegister"
+        android:onClick="handleRegisterClick"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:text="Register"
