@@ -8,26 +8,34 @@
     tools:context=".ui.MainActivity">
 
     <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:onClick="handleLoginClick"
-        android:text="Login"
-        app:layout_constraintBottom_toTopOf="@+id/bntToRegister"
+        android:id="@+id/btnRecipe"
+        android:layout_width="400dp"
+        android:layout_height="61dp"
+        android:onClick="handleRecipe"
+        android:text="recipe"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="4dp"
+        android:onClick="handleLoginClick"
+        android:text="Login"
+        app:layout_constraintBottom_toTopOf="@+id/btnRecipe"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2" />
+
+    <Button
         android:id="@+id/bntToRegister"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
         android:onClick="handleRegisterClick"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
         android:text="Register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/btnRecipe"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
     <EditText
         android:id="@+id/edtEmail"
@@ -76,5 +84,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainTxtAppName" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintGuide_begin="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

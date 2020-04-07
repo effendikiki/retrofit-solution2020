@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mMainTxtAppName;
     private TextView mMainTxtAppVersion;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         doLogin();
     }
 
-    private void doLogin() {
+    public void doLogin() {
         ApiInterface service = ServiceGenerator.createService(ApiInterface.class);
 
         LoginRequest loginRequest = new LoginRequest(email, password);
@@ -85,13 +86,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Gagal Koneksi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Connection Failed, please try again later..", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void handleRegisterClick(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    public void handleRecipe(View view) {
+        Intent intent = new Intent(this, RecipeActivity.class);
         startActivity(intent);
     }
 }
