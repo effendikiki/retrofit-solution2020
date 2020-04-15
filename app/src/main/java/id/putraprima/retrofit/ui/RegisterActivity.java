@@ -43,28 +43,20 @@ public class RegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<Envelope<RegisterResponse>>() {
             @Override
             public void onResponse(Call<Envelope<RegisterResponse>> call, Response<Envelope<RegisterResponse>> response) {
-                if (response.isSuccessful()){
-
-                    Toast.makeText(RegisterActivity.this, "Register Successfull", Toast.LENGTH_SHORT).show();
-                    finish();
-                }else {
-
-                    ApiError error = ErrorUtils.parseError(response);
-
-                    if(error.getError().getName()!= null){
-                        Toast.makeText(RegisterActivity.this, error.getError().getName().get(0), Toast.LENGTH_SHORT).show();
-                    }else if (error.getError().getEmail()!=null){
-                        Toast.makeText(RegisterActivity.this, error.getError().getEmail().get(0), Toast.LENGTH_SHORT).show();
-                    } else  if(error.getError().getPassword()!= null){
-                        Toast.makeText(RegisterActivity.this, error.getError().getPassword().get(0), Toast.LENGTH_SHORT).show();
-                    }else if (error.getError().getConfirmPassword()!=null){
-                        Toast.makeText(RegisterActivity.this, error.getError().getConfirmPassword().get(0), Toast.LENGTH_SHORT).show();
-                    }else if (error.getError().getPassword()!=null){
-                        for (int k = 0 ; k < error.getError().getPassword().size(); k++) {
-                            Toast.makeText(RegisterActivity.this, error.getError().getPassword().get(k), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
+               if (response.isSuccessful()){
+                   Toast.makeText(RegisterActivity.this, "Register Successfull", Toast.LENGTH_SHORT).show();
+               }else{
+                   ApiError error = ErrorUtils.parseError(response);
+                   if (error.getError().getName() != null){
+                       Toast.makeText(RegisterActivity.this, error.getError().getName().get(0), Toast.LENGTH_SHORT).show();
+                   }else if (error.getError().getEmail() !=null){
+                       Toast.makeText(RegisterActivity.this, error.getError().getEmail().get(0), Toast.LENGTH_SHORT).show();
+                   }else if (error.getError().getPassword() != null){
+                       for (int i = 0;i < error.getError().getPassword().size();i++){
+                           Toast.makeText(RegisterActivity.this, error.getError().getPassword().get(i), Toast.LENGTH_SHORT).show();
+                       }
+                   }
+               }
             }
 
             @Override
@@ -81,6 +73,5 @@ public class RegisterActivity extends AppCompatActivity {
         String password_confirm = mPasswordConfirm.getText().toString();
         registerRequest = new RegisterRequest(name, email, password, password_confirm);
         register();
-
     }
 }

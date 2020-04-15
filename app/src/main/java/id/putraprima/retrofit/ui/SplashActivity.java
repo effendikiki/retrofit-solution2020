@@ -85,7 +85,7 @@ public class SplashActivity extends AppCompatActivity {
                 editor.putString("appVersion",response.body().getVersion());
                 editor.apply();
                 //Todo : 3. Implementasikan Proses Pindah Ke MainActivity Jika Proses getAppVersion() sukses
-                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 finish();
             }

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -47,23 +46,18 @@ public class UpdateProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Envelope<UpdateProfileResponse>> call, Response<Envelope<UpdateProfileResponse>> response) {
                 if (response.isSuccessful()){
+                    Toast.makeText(UpdateProfileActivity.this, "Update Profile Success", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     setResult(1, intent);
                     finish();
                 }else{
-
                     ApiError error = ErrorUtils.parseError(response);
-
-                    if(error.getError().getName()!= null){
+                    if (error.getError().getName() != null){
                         Toast.makeText(UpdateProfileActivity.this, error.getError().getName().get(0), Toast.LENGTH_SHORT).show();
-                    }else if (error.getError().getEmail()!=null){
-                        Toast.makeText(UpdateProfileActivity.this, error.getError().getEmail().get(0), Toast.LENGTH_SHORT).show();
-                    }else if (!Patterns.EMAIL_ADDRESS.matcher(error.getError().getEmail().get(0)).matches()){
+                    }else if (error.getError().getEmail() != null){
                         Toast.makeText(UpdateProfileActivity.this, error.getError().getEmail().get(0), Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
             }
 
             @Override
@@ -78,8 +72,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         String name = mNameProfileUpdateText.getText().toString();
         String email = mEmailProfileUpdateText.getText().toString();
         updateProfileRequest = new UpdateProfileRequest(name, email);
-
         doUpdateProfile();
-
     }
 }

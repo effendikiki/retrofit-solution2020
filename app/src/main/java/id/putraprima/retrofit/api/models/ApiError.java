@@ -27,4 +27,5 @@ public class ApiError {
     public void setStatusCode(Integer statusCode) {
         this.statusCode = statusCode;
     }
+
 }

@@ -25,7 +25,7 @@ import retrofit2.Response;
 public class UpdatePasswordActivity extends AppCompatActivity {
 
     private EditText mPasswordPasswordUpdateText;
-    private EditText mEmailPasswordUpdateText;
+    private EditText mConfirmPasswordUpdateText;
 
     private UpdatePasswordRequest updatePasswordRequest;
 
@@ -34,7 +34,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_password);
         mPasswordPasswordUpdateText = findViewById(R.id.passwordPasswordUpdateText);
-        mEmailPasswordUpdateText = findViewById(R.id.emailPasswordUpdateText);
+        mConfirmPasswordUpdateText = findViewById(R.id.confirmPasswordUpdateText);
     }
 
     public void doUpdatePassword(){
@@ -46,24 +46,18 @@ public class UpdatePasswordActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Envelope<UpdatePasswordResponse>> call, Response<Envelope<UpdatePasswordResponse>> response) {
                 if (response.isSuccessful()){
-//                    Toast.makeText(UpdatePasswordActivity.this, "Update Password Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdatePasswordActivity.this, "Update Password Success", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     setResult(2, intent);
                     finish();
                 }else{
                     ApiError error = ErrorUtils.parseError(response);
-
-                    if(error.getError().getPassword()!= null){
-                        Toast.makeText(UpdatePasswordActivity.this, error.getError().getPassword().get(0), Toast.LENGTH_SHORT).show();
-                    }else if (error.getError().getConfirmPassword()!=null){
-                        Toast.makeText(UpdatePasswordActivity.this, error.getError().getConfirmPassword().get(0), Toast.LENGTH_SHORT).show();
-                    }else if (error.getError().getPassword()!=null){
-                        for (int k = 0 ; k < error.getError().getPassword().size(); k++) {
-                            Toast.makeText(UpdatePasswordActivity.this, error.getError().getPassword().get(k), Toast.LENGTH_SHORT).show();
+                    if (error.getError().getPassword() != null){
+                        for (int i = 0;i < error.getError().getPassword().size();i++){
+                            Toast.makeText(UpdatePasswordActivity.this, error.getError().getPassword().get(i), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
-
             }
 
             @Override
@@ -75,29 +69,8 @@ public class UpdatePasswordActivity extends AppCompatActivity {
 
     public void handleUpdatePassword(View view) {
         String password = mPasswordPasswordUpdateText.getText().toString();
-        String password_confirm = mPasswordPasswordUpdateText.getText().toString();
+        String password_confirm = mConfirmPasswordUpdateText.getText().toString();
         updatePasswordRequest = new UpdatePasswordRequest(password, password_confirm);
-
         doUpdatePassword();
-//        boolean check;
-//        if (password.equals("")) {
-//            Toast.makeText(this, "Password is Empty!", Toast.LENGTH_SHORT).show();
-//            check = false;
-//        } else if (password_confirm.equals("")) {
-//            Toast.makeText(this, "Password Confirmation is Empty!", Toast.LENGTH_SHORT).show();
-//            check = false;
-//        } else if (password.length() < 8) {
-//            Toast.makeText(this, "Password limit 8", Toast.LENGTH_SHORT).show();
-//            check = false;
-//        } else if (!password_confirm.equals(password)) {
-//            Toast.makeText(this, "Confirm Password not Same!", Toast.LENGTH_SHORT).show();
-//            check = false;
-//        } else {
-//            check = true;
-//        }
-//        Toast.makeText(this, "New Password : "+password, Toast.LENGTH_SHORT).show();
-//        if (check == true) {
-//            doUpdatePassword();
-//        }
     }
 }

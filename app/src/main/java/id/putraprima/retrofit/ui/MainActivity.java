@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void handleRecipe(View view) {
-        Intent intent = new Intent(this, RecipeActivity.class);
-        startActivity(intent);
-    }
+//    public void handleRecipe(View view) {
+//        Intent intent = new Intent(this, RecipeActivity.class);
+//        startActivity(intent);
+//    }
 }

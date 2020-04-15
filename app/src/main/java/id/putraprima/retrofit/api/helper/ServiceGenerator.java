@@ -16,8 +16,6 @@ public class ServiceGenerator {
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
 
-//    private static Retrofit retrofit = builder.build();
-
     private static Retrofit retrofit;
     public static Retrofit retrofit(){
         return retrofit;
@@ -44,8 +42,9 @@ public class ServiceGenerator {
         if (!TextUtils.isEmpty(authToken)) {
             httpClient.addInterceptor(new AuthenticationInterceptor(authToken));
         }
-        builder.client(httpClient.build());
-        retrofit = builder.build();
+            httpClient.addInterceptor(logging);
+            builder.client(httpClient.build());
+            retrofit = builder.build();
         return retrofit.create(serviceClass);
     }
 
